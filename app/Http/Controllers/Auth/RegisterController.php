@@ -49,7 +49,20 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:100'],
+            'last_name' => ['required', 'string', 'max:100'],
+            'middle_name' => ['required', 'string', 'max:100'],
+            'maiden_name' => ['max:100'],
+            'birth_date' => ['required', 'date_format:Y-m-d'],
+            'contact_number' => ['required', 'string', 'digits:11'],
+            'street' => ['required', 'string', 'max:255'],
+            'city' => ['required', 'string', 'max:100'],
+            'country' => ['required', 'string', 'max:100'],
+            'postal_code' => ['required', 'string', 'max:20'],
+            'status' => ['string', 'max:20'],
+            'marital_status' => ['required', 'string', 'max:20'],
+            'profile_picture' => ['max:255'],
+            'terms' => ['required', 'accepted'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
@@ -64,7 +77,20 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'middle_name' => $data['middle_name'],
+            'maiden_name' => $data['maiden_name'],
+            'birth_date' => date('Y-m-d', strtotime($data['birth_date'])),
+            'accepted_terms_at' => date('Y-m-d'),
+            'accepted_privacy_at' => date('Y-m-d'),
+            'contact_number' => $data['contact_number'],
+            'street' => $data['street'],
+            'city' => $data['city'],
+            'country' => $data['country'],
+            'postal_code' => $data['postal_code'],
+            'status' => 'Active',
+            'marital_status' => $data['marital_status'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
