@@ -31,4 +31,10 @@ Route::middleware(['auth'])->group(function () {
 
   Route::get('/security', 'HomeController@index')->name('security');
 
+  Route::get('/registrations', 'RegistrationController@index')->name('registrations');
+
+  Route::get('/registrations/edit/{user_id}', 'RegistrationController@edit')->name('registrations.edit');
+
+  Route::get('/registrations/delete/{user_id}', 'RegistrationController@destroy')->name('registrations.delete');
+
 });
