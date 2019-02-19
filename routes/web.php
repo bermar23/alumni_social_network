@@ -31,6 +31,8 @@ Route::middleware(['auth'])->group(function () {
 
   Route::get('/security', 'HomeController@index')->name('security');
 
+  Route::post('/profile/image-upload', 'ProfileController@imageUploadPost')->name('image.upload.post');
+
 
   Route::group(['middleware' => ['admin']], function () {
 

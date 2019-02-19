@@ -3,14 +3,40 @@
 @section('content')
 <div class="container">
 <div class="row">
-    <div class="col-4">
+    <div class="col-3">
         <div class="card">
             <div class="card-body">
-                Picture
+                @if($user->profile_picture)
+                <img src="images/{{ $user->profile_picture }}" alt="Profile Picture" class="img-thumbnail">
+                @endif
             </div>
+            <div class="card-footer">
+            
+                @if ($message = Session::get('success-upload'))
+                <div class="alert alert-success alert-block">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>{{ $message }}</strong>
+                </div>
+                @endif
+
+                <form action="{{ route('image.upload.post') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+
+                    
+                    <div class="form-group row">
+                        <input type="file" name="image" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                        <button type="submit" class="btn btn-success">Upload</button> 
+                    </div>
+                    
+                </form>
+
+            </div>
+
         </div>
     </div>
-    <div class="col-sm-8">        
+    <div class="col-sm-9">        
         <div class="card">
             <div class="card-header">{{ __('Profile') }}</div>
 

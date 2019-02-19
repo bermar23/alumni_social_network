@@ -85,4 +85,26 @@ class ProfileController extends Controller
     {
         //
     }
+
+    /**
+     * Upload profile picture
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function imageUploadPost(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $imageName = time().'.'.$request->image->getClientOriginalExtension();
+
+        $request->image->move(public_path('images'), $imageName);
+
+        $user = User::find(Auth::user()->user_id);
+        $user->profile_picture = $imageName;
+        $user->save();
+
+        return back()->with('success-upload', 'You have successfully upload image.');
+    }
 }
