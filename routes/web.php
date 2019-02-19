@@ -25,4 +25,10 @@ Route::middleware(['auth'])->group(function () {
 
   Route::get('/setting', 'HomeController@index')->name('setting');
 
+  Route::put('/profile', 'ProfileController@update')->name('profile');
+
+  Route::get('/security', 'HomeController@index')->name('security');
+
+  Route::get('/security', 'HomeController@index')->name('security');
+
 });
