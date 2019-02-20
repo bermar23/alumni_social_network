@@ -29,6 +29,7 @@ class CreateUsersTable extends Migration
             $table->string('user_type', 20);
             $table->string('marital_status', 20);
             $table->string('profile_picture')->nullable();
+            $table->string('bio', 255)->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamp('accepted_terms_at')->nullable();

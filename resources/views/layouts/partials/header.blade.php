@@ -41,6 +41,9 @@
                     <a class="btn btn-outline-success btn-sm" href="/register">Register</a>
                 </li>
             @else
+                <li class="nav-item mr-3">
+                    <a class="btn btn-outline-success btn-sm" href="{{ route('posts.create') }}">New Post</a>
+                </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                     {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}<span class="caret"></span>

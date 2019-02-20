@@ -85,7 +85,7 @@
     <div class="col-lg-4">
         <img class="rounded-circle" src="images/{{ $contributor->profile_picture }}" alt="Generic placeholder image" width="140" height="140">
         <h2>{{ $contributor->first_name }} {{ $contributor->middle_name }} {{ $contributor->last_name }}</h2>
-        <p>this is a sample bio</p>
+        <p>{{ $contributor->bio }}</p>
         <p><a class="btn btn-secondary" href="#" role="button">View profile &raquo;</a></p>
     </div><!-- /.col-lg-4 -->
     @endforeach

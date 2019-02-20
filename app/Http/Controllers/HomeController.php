@@ -27,7 +27,7 @@ class HomeController extends Controller
     {
         $contributors = User::where('user_type', 'admin')->get();
 
-        $posts = Post::get();
+        $posts = Post::orderBy('created_at', 'desc')->limit(10)->get();
 
         return view('home')->with('contributors', $contributors)->with('posts', $posts);
     }
