@@ -35,6 +35,8 @@ Route::middleware(['auth'])->group(function () {
 
   Route::get('/profile/image/{filename}', ['uses' => 'ProfileController@getProfileImage', 'as' => 'profile.image']);
 
+  Route::put('/profile/update/{user_id}', 'ProfileController@update')->name('profile.update');
+
   Route::get('/posts/show/{post_id}', 'PostController@show')->name('posts.show');
 
 

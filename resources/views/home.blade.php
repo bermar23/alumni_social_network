@@ -83,7 +83,9 @@
     <div class="row">
     @foreach($contributors as $contributor)
     <div class="col-lg-4">
-        <img class="rounded-circle" src="images/{{ $contributor->profile_picture }}" alt="Generic placeholder image" width="140" height="140">
+        @if(Storage::disk('local')->has("images/profile/".$contributor->profile_picture))
+          <img class="rounded-circle" src="{{ route('profile.image', ['filename' => $contributor->profile_picture]) }}" alt="Generic placeholder image" width="140" height="140">
+        @endif
         <h2>{{ $contributor->first_name }} {{ $contributor->middle_name }} {{ $contributor->last_name }}</h2>
         <p>{{ $contributor->bio }}</p>
         <p><a class="btn btn-secondary" href="#" role="button">View profile &raquo;</a></p>

@@ -46,18 +46,47 @@
     <div class="col-sm-9">        
         <div class="card">
             <div class="card-header">{{ __('Profile') }}</div>
-
+            
+            
+            @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+            </div>
+            @endif
+                
+            @if ($message = Session::get('error'))
+            <div class="alert alert-danger alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+            </div>
+            @endif
+            
             <div class="card-body">
-                <form method="POST" action="{{ route('profile') }}">
+                <form method="POST" action="{{ route('profile.update', ['user_id' => $user->user_id]) }}">
                     @csrf
 
                     @method('put')
 
                     <div class="form-group row">
+                        <label for="bio" class="col-md-4 col-form-label text-md-right">{{ __('Bio') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="bio" type="text" class="form-control form-control-sm{{ $errors->has('bio') ? ' is-invalid' : '' }}" name="bio" value="{{ $user->bio }}" autofocus>
+
+                            @if ($errors->has('bio'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('bio') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <label for="first_name" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
 
                         <div class="col-md-6">
-                            <input id="first_name" type="text" class="form-control form-control-sm{{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" value="{{ $user->first_name }}" required autofocus>
+                            <input id="first_name" type="text" class="form-control form-control-sm{{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" value="{{ $user->first_name }}" required>
 
                             @if ($errors->has('first_name'))
                                 <span class="invalid-feedback" role="alert">

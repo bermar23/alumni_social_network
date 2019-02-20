@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\UpdateProfileRequest;
 use Auth;
 use App\User;
 use Illuminate\Http\Response;
@@ -70,13 +71,17 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\UpdateProfileRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateProfileRequest $request, $user_id)
     {
-        //
+        if(!$this->saveProfile(User::FindOrFail($user_id), $request)){
+            return back()->with('error', 'Error updating profile.')->withInput();
+        }
+
+        return back()->with('success', 'Updated successfully.');
     }
 
     /**
@@ -124,5 +129,13 @@ class ProfileController extends Controller
         $file = Storage::disk('local')->get("images/profile/".$filename);
         
         return new Response($file, 200);
+    }
+
+    private function saveProfile(User $user, UpdateProfileRequest $request)
+    {        
+        $user->fill($request->all());
+        $user->save();
+
+        return $user;
     }
 }
