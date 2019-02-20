@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Http\FormRequest;
 use Auth;
 
@@ -12,8 +13,11 @@ class UpdateProfileRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(Request $request)
     {
+        if($request->user_id<>Auth::user()->user_id){
+            return false;
+        }
         return true;
     }
 
