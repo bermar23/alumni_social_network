@@ -22,10 +22,11 @@
         </div>
         <br>
         <div class="row">
-
-        @if(Storage::disk('local')->has("images/posts/".$post->featured_photo))
-        <img class="rounded float-left" src="{{ route('posts.image', ['filename' => $post->featured_photo]) }}" alt="Generic placeholder image">
-        @endif
+        <div class="col-sm-8 offset-2">
+            @if(Storage::disk('local')->has("images/posts/".$post->featured_photo))
+            <img class="img-fluid"  src="{{ route('posts.image', ['filename' => $post->featured_photo]) }}" alt="Generic placeholder image">
+            @endif
+        </div>
         </div>
         <br>
         <div class="row">
@@ -39,6 +40,10 @@
             <h3 class="display-5">{{ _('Comments') }}</h3>
 
         </div>
+        <br>
+        <br>
+        <br>
+        <br>
     </div>    
 </div>
 @endsection
