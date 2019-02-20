@@ -4,7 +4,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12">
-        <h2>{{ __('New Post') }}</h2>
+        <h2>{{ __('Edit Post') }}</h2>
             
         @if ($message = Session::get('success'))
         <div class="alert alert-success alert-block">
@@ -20,14 +20,16 @@
         </div>
         @endif
 
-        <form method="POST" action="{{ route('posts.store') }}">
+        <form method="POST" action="{{ route('posts.update', ['post_id' => $post->post_id]) }}">
             @csrf
+
+            @method('put')
 
             <div class="form-group row">
                 <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Title') }}</label>
 
                 <div class="col-md-6">
-                    <input id="title" type="text" class="form-control form-control-sm{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="" required autofocus>
+                    <input id="title" type="text" class="form-control form-control-sm{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="{{ $post->title }}" required autofocus>
 
                     @if ($errors->has('title'))
                         <span class="invalid-feedback" role="alert">
@@ -41,7 +43,7 @@
                 <label for="body" class="col-md-4 col-form-label text-md-right">{{ __('Body') }}</label>
 
                 <div class="col-md-6">
-                    <textarea id="body" class="form-control{{ $errors->has('body') ? ' is-invalid' : '' }}" name="body" required></textarea>
+                    <textarea id="body" class="form-control{{ $errors->has('body') ? ' is-invalid' : '' }}" name="body" required>{{ $post->body }}</textarea>
 
                     @if ($errors->has('body'))
                         <span class="invalid-feedback" role="alert">

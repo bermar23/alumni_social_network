@@ -48,6 +48,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/posts/store', 'PostController@store')->name('posts.store');
 
+    Route::get('/posts/edit/{post_id}', 'PostController@edit')->name('posts.edit');
+
+    Route::put('/posts/update/{post_id}', 'PostController@update')->name('posts.update');
+
   });
 
 });

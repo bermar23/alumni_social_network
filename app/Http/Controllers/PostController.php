@@ -64,21 +64,31 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($post_id)
     {
-        return view('posts.edit');
+        $post = Post::find($post_id);
+
+        if(!$post){            
+            return redirect('posts');
+        }
+        
+        return view('posts.edit')->with('post', $post);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  App\Http\Requests\SavePostRequest  $request
-     * @param  int  $id
+     * @param  int  $post_id
      * @return \Illuminate\Http\Response
      */
-    public function update(SavePostRequest $request, $id)
-    {
-        return $this->savePost(Post::FindOrFail($id), $request);
+    public function update(SavePostRequest $request, $post_id)
+    {               
+        if(!$this->savePost(Post::FindOrFail($post_id), $request)){
+            return back()->with('error', 'Error updating post.')->withInput();
+        }
+
+        return back()->with('success', 'Updated successfully.');
     }
 
     /**
