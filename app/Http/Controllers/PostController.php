@@ -57,9 +57,17 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($post_id)
     {
-        return view('posts.show');
+        $post = Post::find($post_id);
+
+        if(!$post){            
+            return redirect('posts');
+        }
+
+        $author = User::find($post->user_id);
+        
+        return view('posts.show')->with('post', $post)->with('author', $author);
     }
 
     /**
@@ -114,7 +122,7 @@ class PostController extends Controller
         $post->save();
 
         $file = $request->file('image');
-        
+
         if($file){
             $fileName = $post->post_id.time().'-'.Str::random(32).'.'.$request->image->getClientOriginalExtension();
 

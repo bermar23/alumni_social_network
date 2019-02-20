@@ -62,7 +62,12 @@
     <div class="row featurette">
         <div class="col-md-7">
             <h2 class="featurette-heading">{{ $post->title }}</h2>
-            <p class="lead">{{ $post->body }}</p>
+            <p class="lead">
+              {{ str_limit(strip_tags($post->body), 50) }}
+              @if (strlen(strip_tags($post->body)) > 50)
+                <a href="{{ route('posts.show', ['post_id' => $post->post_id]) }}" class="btn btn-info btn-sm">Read More</a>
+              @endif
+          </p>
         </div>
         <div class="col-md-5">
           @if(Storage::disk('local')->has("images/posts/".$post->featured_photo))
