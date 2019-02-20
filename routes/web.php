@@ -33,6 +33,8 @@ Route::middleware(['auth'])->group(function () {
 
   Route::get('/posts/image/{filename}', ['uses' => 'PostController@getPostImage', 'as' => 'posts.image']);
 
+  Route::get('/profile/image/{filename}', ['uses' => 'ProfileController@getProfileImage', 'as' => 'profile.image']);
+
   Route::get('/posts/show/{post_id}', 'PostController@show')->name('posts.show');
 
 

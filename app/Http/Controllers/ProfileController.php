@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\User;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ProfileController extends Controller
 {
@@ -97,14 +101,28 @@ class ProfileController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $imageName = time().'.'.$request->image->getClientOriginalExtension();
-
-        $request->image->move(public_path('images'), $imageName);
-
         $user = User::find(Auth::user()->user_id);
-        $user->profile_picture = $imageName;
+
+        $file = $request->file('image');
+
+        if(!$file){
+            return back()->with('error-upload', 'Error encountered while trying to upload image.');
+        }
+
+        $fileName = $user->user_id.time().'-'.Str::random(32).'.'.$request->image->getClientOriginalExtension();
+
+        Storage::disk('local')->put("images/profile/".$fileName, File::get($file));
+
+        $user->profile_picture = $fileName;
         $user->save();
 
         return back()->with('success-upload', 'You have successfully upload image.');
+    }
+
+    public function getProfileImage($filename)
+    {
+        $file = Storage::disk('local')->get("images/profile/".$filename);
+        
+        return new Response($file, 200);
     }
 }

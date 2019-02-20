@@ -71,7 +71,7 @@
         </div>
         <div class="col-md-5">
           @if(Storage::disk('local')->has("images/posts/".$post->featured_photo))
-          <img class="featurette-image img-fluid mx-auto" src="{{ route('posts.image', ['filename' => $post->featured_photo]) }}" alt="Generic placeholder image">
+          <img class="featurette-image img-fluid mx-auto" src="{{ route('posts.image', ['filename' => $post->featured_photo]) }}" alt="Featured Image">
           @endif
         </div>
     </div>

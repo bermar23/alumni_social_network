@@ -6,14 +6,21 @@
     <div class="col-3">
         <div class="card">
             <div class="card-body">
-                @if($user->profile_picture)
-                <img src="images/{{ $user->profile_picture }}" alt="Profile Picture" class="img-thumbnail">
-                @endif
+            @if(Storage::disk('local')->has("images/profile/".$user->profile_picture))
+            <img class="img-thumbnail" src="{{ route('profile.image', ['filename' => $user->profile_picture]) }}" alt="Profile Picture">
+            @endif
             </div>
             <div class="card-footer">
             
                 @if ($message = Session::get('success-upload'))
                 <div class="alert alert-success alert-block">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>{{ $message }}</strong>
+                </div>
+                @endif
+            
+                @if ($message = Session::get('error-upload'))
+                <div class="alert alert-error alert-block">
                     <button type="button" class="close" data-dismiss="alert">×</button>
                     <strong>{{ $message }}</strong>
                 </div>
