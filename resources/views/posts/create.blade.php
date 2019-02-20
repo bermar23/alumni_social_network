@@ -20,7 +20,7 @@
         </div>
         @endif
 
-        <form method="POST" action="{{ route('posts.store') }}">
+        <form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
             @csrf
 
             <div class="form-group row">
@@ -41,7 +41,7 @@
                 <label for="body" class="col-md-4 col-form-label text-md-right">{{ __('Body') }}</label>
 
                 <div class="col-md-6">
-                    <textarea id="body" class="form-control{{ $errors->has('body') ? ' is-invalid' : '' }}" name="body" required></textarea>
+                    <textarea id="body" class="form-control{{ $errors->has('body') ? ' is-invalid' : '' }}" name="body" rows="8" required></textarea>
 
                     @if ($errors->has('body'))
                         <span class="invalid-feedback" role="alert">
@@ -49,7 +49,14 @@
                         </span>
                     @endif
                 </div>
-            </div>                        
+            </div>          
+
+            <div class="form-group row">
+                <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Featured Image') }}</label>
+                <div class="col-md-6">
+                    <input type="file" name="image" class="form-control form-control-sm">
+                </div>          
+            </div>          
 
             <div class="form-group row mb-0">
                 <div class="col-md-6 offset-md-4">

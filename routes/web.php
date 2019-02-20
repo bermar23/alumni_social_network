@@ -31,6 +31,8 @@ Route::middleware(['auth'])->group(function () {
 
   Route::post('/profile/image-upload', 'ProfileController@imageUploadPost')->name('image.upload.post');
 
+  Route::get('/posts/image/{filename}', ['uses' => 'PostController@getPostImage', 'as' => 'posts.image']);
+
 
   Route::group(['middleware' => ['admin']], function () {
 

@@ -24,8 +24,9 @@ class SavePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|unique:posts|max:255',
+            'title' => 'required|max:255',
             'body' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg|max:2048',
         ];
     }
 }

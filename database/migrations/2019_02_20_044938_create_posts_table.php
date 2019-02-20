@@ -18,6 +18,7 @@ class CreatePostsTable extends Migration
             $table->unsignedInteger('user_id');
             $table->string('title', 255);
             $table->text('body');
+            $table->string('featured_photo')->nullable();
             $table->timestamps();
         });
     }

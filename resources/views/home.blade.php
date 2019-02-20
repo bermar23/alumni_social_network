@@ -65,7 +65,9 @@
             <p class="lead">{{ $post->body }}</p>
         </div>
         <div class="col-md-5">
-            <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+          @if(Storage::disk('local')->has("images/posts/".$post->featured_photo))
+          <img class="featurette-image img-fluid mx-auto" src="{{ route('posts.image', ['filename' => $post->featured_photo]) }}" alt="Generic placeholder image">
+          @endif
         </div>
     </div>
 

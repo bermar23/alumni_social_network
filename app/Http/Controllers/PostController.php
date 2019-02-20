@@ -7,6 +7,10 @@ use App\Http\Requests\SavePostRequest;
 use Auth;
 use App\User;
 use App\Post;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -109,6 +113,23 @@ class PostController extends Controller
         $post->user_id = $user->user_id;
         $post->save();
 
+        $file = $request->file('image');
+        
+        if($file){
+            $fileName = $post->post_id.time().'-'.Str::random(32).'.'.$request->image->getClientOriginalExtension();
+
+            Storage::disk('local')->put("images/posts/".$fileName, File::get($file));
+            $post->featured_photo = $fileName;
+            $post->update();
+        }
+
         return $post;
+    }
+
+    public function getPostImage($filename)
+    {
+        $file = Storage::disk('local')->get("images/posts/".$filename);
+        
+        return new Response($file, 200);
     }
 }
