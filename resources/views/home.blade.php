@@ -3,41 +3,26 @@
 @section('content')
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
+    @foreach($headlines as $key => $headline)
+    <li data-target="#myCarousel" data-slide-to="{{ $key }}" class="{{ ($key==0?'active':'') }}"></li>
+    @endforeach
   </ol>
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
+    @foreach($headlines as $key => $headline)
+    <div class="carousel-item {{ ($key==0?'active':'') }}">
+      @if(Storage::disk('local')->has("images/headlines/".$headline->featured_photo))
+        <img class="first-slide" src="{{ route('headlines.image', ['filename' => $headline->featured_photo]) }}" alt="Slide Image">
+      @endif
       <div class="container">
-        <div class="carousel-caption text-left">
-          <h1>Example headline.</h1>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-          <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+        <div class="carousel-caption text-center">
+          <h1>{{ $headline->title }}</h1>
+          <p>{{ $headline->body }}</p>
+          <p><a class="btn btn-sm btn-primary" href="{{ $headline->url }}" role="button">Click Here...</a></p>
         </div>
       </div>
     </div>
-    <div class="carousel-item">
-      <img class="second-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
-      <div class="container">
-        <div class="carousel-caption">
-          <h1>Another example headline.</h1>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-          <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
-        </div>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img class="third-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
-      <div class="container">
-        <div class="carousel-caption text-right">
-          <h1>One more for good measure.</h1>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-          <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
-        </div>
-      </div>
-    </div>
+    @endforeach
+    
   </div>
   <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>

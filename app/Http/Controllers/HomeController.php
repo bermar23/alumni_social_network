@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Post;
+use App\Headline;
 
 class HomeController extends Controller
 {
@@ -29,6 +30,8 @@ class HomeController extends Controller
 
         $posts = Post::orderBy('created_at', 'desc')->limit(10)->get();
 
-        return view('home')->with('contributors', $contributors)->with('posts', $posts);
+        $headlines = Headline::orderBy('created_at', 'desc')->limit(10)->get();
+
+        return view('home')->with('contributors', $contributors)->with('posts', $posts)->with('headlines', $headlines);
     }
 }

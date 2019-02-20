@@ -33,11 +33,15 @@ Route::middleware(['auth'])->group(function () {
 
   Route::get('/posts/image/{filename}', ['uses' => 'PostController@getPostImage', 'as' => 'posts.image']);
 
+  Route::get('/headlines/image/{filename}', ['uses' => 'HeadlineController@getHeadlineImage', 'as' => 'headlines.image']);
+
   Route::get('/profile/image/{filename}', ['uses' => 'ProfileController@getProfileImage', 'as' => 'profile.image']);
 
   Route::put('/profile/update/{user_id}', 'ProfileController@update')->name('profile.update');
 
   Route::get('/posts/show/{post_id}', 'PostController@show')->name('posts.show');
+
+  Route::get('/headlines/show/{headline_id}', 'HeadlineController@show')->name('headlines.show');
 
 
   Route::group(['middleware' => ['admin']], function () {
@@ -57,6 +61,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/posts/edit/{post_id}', 'PostController@edit')->name('posts.edit');
 
     Route::put('/posts/update/{post_id}', 'PostController@update')->name('posts.update');
+
+    Route::get('/headlines', 'HeadlineController@index')->name('headlines');
+
+    Route::get('/headlines/create', 'HeadlineController@create')->name('headlines.create');
+
+    Route::post('/headlines/store', 'HeadlineController@store')->name('headlines.store');
+
+    Route::get('/headlines/edit/{headline_id}', 'HeadlineController@edit')->name('headlines.edit');
+
+    Route::put('/headlines/update/{headline_id}', 'HeadlineController@update')->name('headlines.update');
 
   });
 

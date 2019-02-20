@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Headline extends Model
 {
 
     /**
@@ -13,8 +13,8 @@ class Post extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'title', 'body', 'featured_photo',
+        'user_id', 'title', 'body', 'featured_photo', 'url',
     ];
 
-    protected $primaryKey = 'post_id';
+    protected $primaryKey = 'headline_id';
 }
