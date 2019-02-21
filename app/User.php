@@ -35,6 +35,8 @@ class User extends Authenticatable
         'accepted_privacy_at', 
         'email', 
         'password',
+        'provider',
+        'provider_id',
     ];
 
     /**

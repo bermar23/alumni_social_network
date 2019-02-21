@@ -64,10 +64,40 @@
                                 @endif
                             </div>
                         </div>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                                <a type="button" class="btn btn-sm btn-primary" href="{{ route('auth.login', ['provider' => 'facebook']) }}">
+                                    {{ __('Login via Facebook') }}
+                                </a>
+                            </div>
+                        </div>
+
+                        <!--<div class="form-group row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                                <div class="fb-login-button" data-size="medium" data-button-type="login_with" data-auto-logout-link="false" data-use-continue-as="false"></div>
+                            </div>
+                        </div>-->
+
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endsection
+
+
+@section('custom-page-scripts')
+<script>
+FB.login(function(response) {
+  if (response.status === 'connected') {
+    // Logged into your app and Facebook.
+    alert('Logged in!!');
+    console.log(response);
+  } else {
+    // The person is not logged into this app or we are unable to tell. 
+  }
+})
+</script>
 @endsection

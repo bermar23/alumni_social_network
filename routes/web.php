@@ -17,6 +17,10 @@ Route::get('/', 'HomeController@index');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('auth.callback');
+
+Route::get('/auth/{provider}', 'Auth\LoginController@redirectToProvider')->name('auth.login');
+
 Route::middleware(['auth'])->group(function () {
 
   Route::get('/profile', 'ProfileController@index')->name('profile');
