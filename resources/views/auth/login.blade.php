@@ -53,10 +53,14 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-sm btn-primary">
+                                <button type="submit" class="btn btn-sm btn-primary mb-2">
                                     {{ __('Login') }}
                                 </button>
+                            </div>
+                        </div>
 
+                        <div class="form-group row mb-0">                        
+                            <div class="col-md-8 offset-md-4">
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
@@ -65,19 +69,15 @@
                             </div>
                         </div>
 
+                        <hr>
+
                         <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <a type="button" class="btn btn-sm btn-primary" href="{{ route('auth.login', ['provider' => 'facebook']) }}">
-                                    {{ __('Login via Facebook') }}
+                            <div class="col-sm-12 text-center">
+                                <a class="btn btn-sm btn-primary" href="{{ route('auth.login', ['provider' => 'facebook']) }}">
+                                    <i class="fa fa-facebook"></i> {{ __('Login with Facebook') }}
                                 </a>
                             </div>
                         </div>
-
-                        <!--<div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <div class="fb-login-button" data-size="medium" data-button-type="login_with" data-auto-logout-link="false" data-use-continue-as="false"></div>
-                            </div>
-                        </div>-->
 
                     </form>
                 </div>
@@ -89,15 +89,5 @@
 
 
 @section('custom-page-scripts')
-<script>
-FB.login(function(response) {
-  if (response.status === 'connected') {
-    // Logged into your app and Facebook.
-    alert('Logged in!!');
-    console.log(response);
-  } else {
-    // The person is not logged into this app or we are unable to tell. 
-  }
-})
-</script>
+
 @endsection

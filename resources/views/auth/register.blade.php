@@ -232,6 +232,16 @@
                                 </button>
                             </div>
                         </div>
+
+                        <hr>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-sm-12 text-center">
+                                <a class="btn btn-sm btn-primary" href="{{ route('auth.login', ['provider' => 'facebook']) }}">
+                                    <i class="fa fa-facebook"></i> {{ __('Login with Facebook') }}
+                                </a>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
