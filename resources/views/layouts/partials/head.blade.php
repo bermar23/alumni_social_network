@@ -6,8 +6,5 @@
 
 <title>{{ config('app.name', 'Laravel') }}</title>
 
-<!-- Scripts -->
-<script src="{{ mix('/js/app.js') }}"></script>
-
 <!-- Styles -->
 <link rel="stylesheet" href="{{ mix('/css/app.css') }}" >

@@ -47,6 +47,8 @@ Route::middleware(['auth'])->group(function () {
 
   Route::get('/headlines/show/{headline_id}', 'HeadlineController@show')->name('headlines.show');
 
+  Route::get('/posts/create', 'PostController@create')->name('posts.create');
+
 
   Route::group(['middleware' => ['admin']], function () {
 
@@ -57,8 +59,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/registrations/delete/{user_id}', 'RegistrationController@destroy')->name('registrations.delete');
 
     Route::get('/posts', 'PostController@index')->name('posts');
-
-    Route::get('/posts/create', 'PostController@create')->name('posts.create');
 
     Route::post('/posts/store', 'PostController@store')->name('posts.store');
 

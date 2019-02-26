@@ -1,4 +1,3 @@
-<script>
 
-
-</script>
+<!-- Scripts -->
+<script src="{{ mix('/js/app.js') }}"></script>
